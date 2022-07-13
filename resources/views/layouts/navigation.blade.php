@@ -4,9 +4,7 @@
             <span class="navbar-brand mb-0 h1">Training Manager</span>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Sessions</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Users</a></li>
+                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
             </ul>
 
             @auth
@@ -18,6 +16,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="#">Account</a></li>
+                        <li><a class="dropdown-item" href="#">Trainees</a></li>
 
                         <div class="dropdown-divider"></div>
 
