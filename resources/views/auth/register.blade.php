@@ -32,6 +32,7 @@
             <div class="form-floating mb-3">
                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required autocomplete="new-password">
                 <label for="floatingPassword">Password</label>
+                <small class="text-muted">Minimum of 8 charaters required.</small>
             </div>
             <div class="form-floating mb-3">
                 <input type="password" name="password_confirmation" class="form-control" id="floatingPasswordConf" placeholder="Password" required autocomplete="new-password">
