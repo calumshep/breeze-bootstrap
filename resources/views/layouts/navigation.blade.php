@@ -1,17 +1,30 @@
-<header class="p-3 mb-3 border-bottom">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
     <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <span class="navbar-brand mb-0 h1">Training Manager</span>
+        <span class="navbar-brand">Training Manager</span>
 
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="navbar-item @if(Route::currentRouteName() == 'dashboard') active @endif">
+                    <a href="{{ route('dashboard') }}" class="nav-link px-2 link-secondary">Home</a>
+                </li>
+
+                @can('manage training sessions')
+                    <li class="navbar-item @if(str_contains(Route::currentRouteName(), 'sessions')) active @endif">
+                        <a href="{{ route('sessions.index') }}" class="nav-link px-2">Sessions</a>
+                    </li>
+                @endcan
             </ul>
 
             @auth
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         Calum Shepherd
-                        <img src="https://scontent.fgla1-1.fna.fbcdn.net/v/t39.30808-6/242193848_2364211513748201_7568626738875509754_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=KNOS12FzeaAAX-cOgeE&_nc_ht=scontent.fgla1-1.fna&oh=00_AT8lfyT0uq7yZ4euLaJ938i8mZLQBUrLcAY9W9SR6fZKkQ&oe=62D2D596" alt="mdo" width="32" height="32" class="rounded-circle ms-3 mb-1">
+                        <img src="https://via.placeholder.com/50" alt="Profile icon" width="32" height="32" class="rounded-circle ms-3 mb-1">
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser1">
@@ -34,4 +47,4 @@
             @endauth
         </div>
     </div>
-</header>
+</nav>

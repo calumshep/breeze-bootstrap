@@ -30,7 +30,7 @@
 <div class="card mb-3">
 	<div class="row g-0">
 		<div class="col-md-3">
-			<img src="https://via.placeholder.com/400" class="img-fluid" alt="Placeholder image">
+			<img src="https://via.placeholder.com/400x300" class="img-fluid" alt="Placeholder image">
 		</div>
 		<div class="col-md-9">
 			<div class="card-body">
@@ -54,7 +54,7 @@
 <div class="card mb-3">
 	<div class="row g-0">
 		<div class="col-md-3">
-			<img src="https://via.placeholder.com/400" class="img-fluid" alt="Placeholder image">
+			<img src="https://via.placeholder.com/400x300" class="img-fluid" alt="Placeholder image">
 		</div>
 		<div class="col-md-9">
 			<div class="card-body">
@@ -78,7 +78,7 @@
 <div class="card mb-3">
 	<div class="row g-0">
 		<div class="col-md-3">
-			<img src="https://via.placeholder.com/400" class="img-fluid" alt="Placeholder image">
+			<img src="https://via.placeholder.com/400x300" class="img-fluid" alt="Placeholder image">
 		</div>
 		<div class="col-md-9">
 			<div class="card-body">
