@@ -21,13 +21,13 @@
             </ul>
 
             @auth
-                <div class="dropdown text-end">
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Calum Shepherd
+                <div class="dropdown text-white text-end">
+                    <a href="#" class="d-block nav-link text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown">
+                        {{ auth()->user()->name }}
                         <img src="https://via.placeholder.com/50" alt="Profile icon" width="32" height="32" class="rounded-circle ms-3 mb-1">
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser1">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Account</a></li>
                         <li><a class="dropdown-item" href="#">Trainees</a></li>
 
