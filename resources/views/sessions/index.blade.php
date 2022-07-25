@@ -39,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">No sessions found.</td>
+                    <td colspan="6">No sessions found.</td>
                 </tr>
             @endforelse
         </tbody>
