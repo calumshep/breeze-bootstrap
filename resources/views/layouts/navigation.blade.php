@@ -8,7 +8,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <li class="navbar-item">
                     <a href="{{ route('dashboard') }}"
                        class="nav-link px-2 @if(Route::currentRouteName() == 'dashboard') active @endif">
@@ -34,24 +34,25 @@
             </ul>
 
             @auth
-                <div class="dropdown text-white text-end">
-                    <a href="#" class="d-block nav-link text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown">
-                        {{ auth()->user()->name }}
-                        <img src="https://via.placeholder.com/50" alt="Profile icon" width="32" height="32" class="rounded-circle ms-3 mb-1">
-                    </a>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            {{ auth()->user()->name }}
+                            <img src="https://via.placeholder.com/50" alt="Profile icon" width="32" height="32" class="rounded-circle ms-2 mb-1">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('account') }}">Account</a></li>
+                            <li><a class="dropdown-item" href="#">Credit</a></li>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Account</a></li>
-                        <li><a class="dropdown-item" href="#">Trainees</a></li>
+                            <div class="dropdown-divider"></div>
 
-                        <div class="dropdown-divider"></div>
-
-                        <form class="px-3" method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="btn btn-secondary" type="submit">Sign out</button>
-                        </form>
-                    </ul>
-                </div>
+                            <form class="px-3" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="btn btn-secondary" type="submit">Sign out</button>
+                            </form>
+                        </ul>
+                    </li>
+                </ul>
             @else
                 <div class="text-end">
                     <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
