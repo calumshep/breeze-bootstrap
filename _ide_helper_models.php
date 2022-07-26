@@ -39,6 +39,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Trainee
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $first_name
+ * @property string $last_name
+ * @property \Illuminate\Support\Carbon $dob
+ * @property int $user_id
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereDob($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereUserId($value)
+ */
+	class Trainee extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -58,6 +84,8 @@ namespace App\Models{
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Trainee[] $trainees
+ * @property-read int|null $trainees_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()

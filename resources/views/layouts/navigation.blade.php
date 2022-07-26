@@ -9,13 +9,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="navbar-item @if(Route::currentRouteName() == 'dashboard') active @endif">
-                    <a href="{{ route('dashboard') }}" class="nav-link px-2 link-secondary">Home</a>
+                <li class="navbar-item">
+                    <a href="{{ route('dashboard') }}"
+                       class="nav-link px-2 @if(Route::currentRouteName() == 'dashboard') active @endif">
+                        Home
+                    </a>
+                </li>
+
+                <li class="navbar-item">
+                    <a href="{{ route('trainees.index') }}"
+                       class="nav-link px-2 @if(str_contains(Route::currentRouteName(), 'trainees')) active @endif">
+                        Trainees
+                    </a>
                 </li>
 
                 @can('manage training sessions')
-                    <li class="navbar-item @if(str_contains(Route::currentRouteName(), 'sessions')) active @endif">
-                        <a href="{{ route('sessions.index') }}" class="nav-link px-2">Sessions</a>
+                    <li class="navbar-item">
+                        <a href="{{ route('sessions.index') }}"
+                           class="nav-link px-2 @if(str_contains(Route::currentRouteName(), 'sessions')) active @endif">
+                            Sessions
+                        </a>
                     </li>
                 @endcan
             </ul>
