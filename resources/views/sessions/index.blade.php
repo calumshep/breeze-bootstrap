@@ -22,8 +22,8 @@
         <tbody>
             @forelse($sessions as $session)
                 <tr>
-                    <td>{{ $loop->index }}</td>
-                    <td>{{ $session->time }}</td>
+                    <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ $session->time->format('H:i, l, j M Y') }}</td>
                     <td>{{ $session->name }}</td>
                     <td>{{ $session->cost }} credits</td>
                     <td>
@@ -33,8 +33,8 @@
                             0
                         @endif
                     </td>
-                    <td>
-                        <a href="{{ route('sessions.show', $session->id) }}">View</a>
+                    <td class="text-end">
+                        <a href="{{ route('sessions.show', $session->id) }}">View &raquo;</a>
                     </td>
                 </tr>
             @empty

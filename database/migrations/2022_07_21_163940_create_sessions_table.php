@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->timestamp('time');
+            $table->dateTime('time');
             $table->integer('cost');
             $table->text('description');
             $table->integer('capacity')->nullable();
