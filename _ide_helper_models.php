@@ -46,7 +46,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $first_name
  * @property string $last_name
- * @property string $dob
+ * @property \Illuminate\Support\Carbon $dob
  * @property int $user_id
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee newModelQuery()
