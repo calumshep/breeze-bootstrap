@@ -18,7 +18,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $name
- * @property string $date
+ * @property \Illuminate\Support\Carbon $time
  * @property int $cost
  * @property string $description
  * @property int|null $capacity
@@ -28,10 +28,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Session whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Session whereTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereUpdatedAt($value)
  */
 	class Session extends \Eloquent {}

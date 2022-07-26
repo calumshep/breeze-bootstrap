@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.19.0.
+ * Generated for Laravel 9.22.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -6295,16 +6295,17 @@
                         return $instance->lines($path);
         }
                     /**
-         * Get the MD5 hash of the file at the given path.
+         * Get the hash of the file at the given path.
          *
          * @param string $path
+         * @param string $algorithm
          * @return string 
          * @static 
          */ 
-        public static function hash($path)
+        public static function hash($path, $algorithm = 'md5')
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
-                        return $instance->hash($path);
+                        return $instance->hash($path, $algorithm);
         }
                     /**
          * Write the contents of a file.
@@ -7131,6 +7132,33 @@
                         /** @var \Illuminate\Auth\Access\Gate $instance */
                         return $instance->setContainer($container);
         }
+                    /**
+         * Deny with a HTTP status code.
+         *
+         * @param int $status
+         * @param \Illuminate\Auth\Access\?string $message
+         * @param \Illuminate\Auth\Access\?int $code
+         * @return \Illuminate\Auth\Access\Response 
+         * @static 
+         */ 
+        public static function denyWithStatus($status, $message = null, $code = null)
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->denyWithStatus($status, $message, $code);
+        }
+                    /**
+         * Deny with a 404 HTTP status code.
+         *
+         * @param \Illuminate\Auth\Access\?string $message
+         * @param \Illuminate\Auth\Access\?int $code
+         * @return \Illuminate\Auth\Access\Response 
+         * @static 
+         */ 
+        public static function denyAsNotFound($message = null, $code = null)
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->denyAsNotFound($message, $code);
+        }
          
     }
             /**
@@ -7317,7 +7345,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
      * @method static \Illuminate\Http\Client\PendingRequest async()
-     * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string $contents = '', string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string|resource $contents = '', string|null $filename = null, array $headers = [])
      * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
      * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
@@ -7418,7 +7446,7 @@
                         return $instance->stubUrl($url, $callback);
         }
                     /**
-         * Indicate that an exception should not be thrown if any request is not faked.
+         * Indicate that an exception should be thrown if any request is not faked.
          *
          * @param bool $prevent
          * @return \Illuminate\Http\Client\Factory 
@@ -10374,6 +10402,30 @@
                         $instance->setLaravelSession($session);
         }
                     /**
+         * Set the locale for the request instance.
+         *
+         * @param string $locale
+         * @return void 
+         * @static 
+         */ 
+        public static function setRequestLocale($locale)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        $instance->setRequestLocale($locale);
+        }
+                    /**
+         * Set the default locale for the request instance.
+         *
+         * @param string $locale
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultRequestLocale($locale)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        $instance->setDefaultRequestLocale($locale);
+        }
+                    /**
          * Get the user making the request.
          *
          * @param string|null $guard
@@ -11785,6 +11837,19 @@
         {
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->date($key, $format, $tz);
+        }
+                    /**
+         * Retrieve input from the request as an enum.
+         *
+         * @param string $key
+         * @param string $enumClass
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function enum($key, $enumClass)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->enum($key, $enumClass);
         }
                     /**
          * Retrieve input from the request as a collection.
@@ -14762,6 +14827,17 @@
                         return $instance->url($path);
         }
                     /**
+         * Determine if temporary URLs can be generated.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function providesTemporaryUrls()
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->providesTemporaryUrls();
+        }
+                    /**
          * Get a temporary URL for the file at the given path.
          *
          * @param string $path
@@ -16577,7 +16653,242 @@
      
 }
 
-        namespace Spatie\LaravelIgnition\Facades { 
+        namespace Biscolab\ReCaptcha\Facades { 
+            /**
+     * Class ReCaptcha
+     *
+     * @package Biscolab\ReCaptcha\Facades
+     * @method static string htmlFormButton(?string $button_label = '', ?array $properties = [])
+     * @method static string getFormId()
+     */ 
+        class ReCaptcha {
+                    /**
+         * Write ReCAPTCHA HTML tag in your FORM
+         * Insert before </form> tag
+         *
+         * @param null|array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function htmlFormSnippet($attributes = [])
+        {
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->htmlFormSnippet($attributes);
+        }
+                    /**
+         * 
+         *
+         * @return array 
+         * @throws InvalidConfigurationException
+         * @static 
+         */ 
+        public static function getTagAttributes()
+        {
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getTagAttributes();
+        }
+                    /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getOnLoadCallback()
+        {
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getOnLoadCallback();
+        }
+                    /**
+         * Compare given attributes with allowed attributes
+         *
+         * @param array|null $attributes
+         * @return array 
+         * @static 
+         */ 
+        public static function cleanAttributes($attributes = [])
+        {
+                        return \Biscolab\ReCaptcha\ReCaptchaBuilderV2::cleanAttributes($attributes);
+        }
+                    /**
+         * 
+         *
+         * @param string $api_site_key
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setApiSiteKey($api_site_key)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setApiSiteKey($api_site_key);
+        }
+                    /**
+         * 
+         *
+         * @param string $api_secret_key
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setApiSecretKey($api_secret_key)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setApiSecretKey($api_secret_key);
+        }
+                    /**
+         * 
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function getCurlTimeout()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getCurlTimeout();
+        }
+                    /**
+         * 
+         *
+         * @param string $version
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setVersion($version)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setVersion($version);
+        }
+                    /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getVersion()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getVersion();
+        }
+                    /**
+         * 
+         *
+         * @param bool $skip_by_ip
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setSkipByIp($skip_by_ip)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setSkipByIp($skip_by_ip);
+        }
+                    /**
+         * 
+         *
+         * @param null|string $api_domain
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setApiDomain($api_domain = null)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setApiDomain($api_domain);
+        }
+                    /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiDomain()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getApiDomain();
+        }
+                    /**
+         * 
+         *
+         * @return \Biscolab\ReCaptcha\ReCaptchaBuilder 
+         * @static 
+         */ 
+        public static function setApiUrls()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->setApiUrls();
+        }
+                    /**
+         * 
+         *
+         * @return array|mixed 
+         * @static 
+         */ 
+        public static function getIpWhitelist()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getIpWhitelist();
+        }
+                    /**
+         * Checks whether the user IP address is among IPs "to be skipped"
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function skipByIp()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->skipByIp();
+        }
+                    /**
+         * Write script HTML tag in you HTML code
+         * Insert before </head> tag
+         *
+         * @param array|null $configuration
+         * @return string 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function htmlScriptTagJsApi($configuration = [])
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->htmlScriptTagJsApi($configuration);
+        }
+                    /**
+         * Call out to reCAPTCHA and process the response
+         *
+         * @param string $response
+         * @return boolean|array 
+         * @static 
+         */ 
+        public static function validate($response)
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->validate($response);
+        }
+                    /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiSiteKey()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getApiSiteKey();
+        }
+                    /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiSecretKey()
+        {            //Method inherited from \Biscolab\ReCaptcha\ReCaptchaBuilder         
+                        /** @var \Biscolab\ReCaptcha\ReCaptchaBuilderV2 $instance */
+                        return $instance->getApiSecretKey();
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
      *
@@ -20808,6 +21119,7 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class ReCaptcha extends \Biscolab\ReCaptcha\Facades\ReCaptcha {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }
