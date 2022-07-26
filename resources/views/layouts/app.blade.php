@@ -10,7 +10,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        @yield('styles')
+        @yield('head')
     </head>
 
     <body>
