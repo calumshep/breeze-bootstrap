@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="d-md-flex justify-content-between align-items-baseline mb-3">
-        <h1>Sessions Admin</h1>
+        <h1>Manage sessions</h1>
         <a href="{{ route('sessions.create') }}" class="btn btn-primary">New session</a>
     </div>
 
