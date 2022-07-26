@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('head')
+
+    {!! htmlScriptTagJsApi() !!}
+
+@endsection
+
 @section('content')
 
 <div class="row justify-content-center">
@@ -26,13 +32,16 @@
             <div class="form-floating mb-3">
                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required autocomplete="new-password">
                 <label for="floatingPassword">Password</label>
+                <small class="text-muted">Minimum of 8 charaters required.</small>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" name="password-confirmation" class="form-control" id="floatingPasswordConf" placeholder="Password" required autocomplete="new-password">
+                <input type="password" name="password_confirmation" class="form-control" id="floatingPasswordConf" placeholder="Password" required autocomplete="new-password">
                 <label for="floatingPasswordConf">Confirm Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+            {!! htmlFormSnippet() !!}
+
+            <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
 
             <div class="flex text-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
