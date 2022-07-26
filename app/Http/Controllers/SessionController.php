@@ -55,7 +55,7 @@ class SessionController extends Controller
         ]);
         $session->save();
 
-        return redirect()->route('sessions.index');
+        return redirect()->route('sessions.index')->with('status', 'Session created!');
     }
 
     /**
@@ -89,11 +89,31 @@ class SessionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Session  $session
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Session $session)
     {
-        //
+        $request->validate([
+            'name'          => 'required|max:255',
+            'date'          => 'required|after:today',
+            'time'          => 'required',
+            'cost'          => 'required',
+            'description'   => 'required',
+            'capacity'      => 'nullable',
+        ]);
+
+        $session->fill([
+            'name'          => $request->name,
+            'date'          => $request->date,
+            'time'          => $request->time,
+            'cost'          => $request->cost,
+            'description'   => $request->description,
+            'capacity'      => $request->capacity,
+        ]);
+        $session->save();
+
+        return redirect()->route('sessions.index')->with('status', 'Session update saved!');
     }
 
     /**

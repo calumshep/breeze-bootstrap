@@ -2,12 +2,19 @@
 
 @section('content')
 
-    <div class="d-md-flex justify-content-between align-items-baseline">
+    <div class="d-md-flex justify-content-between align-items-baseline mb-3">
         <h1>Sessions Admin</h1>
         <a href="{{ route('sessions.create') }}" class="btn btn-primary">New session</a>
     </div>
 
-    <table class="table table-hover">
+    @if(session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status')  }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>#</th>
