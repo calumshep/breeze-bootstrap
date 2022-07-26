@@ -26,7 +26,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return view('sessions.create');
+        return view('sessions.form');
     }
 
     /**
@@ -48,7 +48,7 @@ class SessionController extends Controller
 
         $session = Session::create([
             'name'          => $request->name,
-            'time'          => $request->time,
+            'time'          => $request->date . " " . $request->time,
             'cost'          => $request->cost,
             'description'   => $request->description,
             'capacity'      => $request->capacity,
@@ -62,22 +62,26 @@ class SessionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Session  $session
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Session $session)
     {
-        //
+        return view('sessions.form', [
+            'session' => $session,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Session  $session
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Session $session)
     {
-        //
+        return view('sessions.form', [
+            'session' => $session,
+        ]);
     }
 
     /**
