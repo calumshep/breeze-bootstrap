@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TraineeController;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-Route::get('/account', function () {
-    return view('accounts.show', auth()->user());
-})->middleware(['auth'])->name('account');
+Route::controller(AccountController::class)->middleware(['auth'])->group(function () {
+    Route::get('/account', 'showOwn')->name('account.own');
+    Route::put('/account/{user}', 'update')->name('account.update');
+});
 
 Route::resource('sessions', SessionController::class);
 Route::resource('trainees', TraineeController::class);
