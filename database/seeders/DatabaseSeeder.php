@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -46,22 +47,25 @@ class DatabaseSeeder extends Seeder
 
         // Create Admin user with role
         $user = User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'first_name'    => 'Admin',
+            'last_name'     => 'User',
+            'email'         => 'admin@example.com',
         ]);
         $user->assignRole('admin');
 
         // Create Coach user with role
         $user = User::factory()->create([
-            'name' => 'Coach User',
-            'email' => 'coach@example.com',
+            'first_name'    => 'Coach',
+            'last_name'     => 'User',
+            'email'         => 'coach@example.com',
         ]);
         $user->assignRole('coach');
 
         // Create basic user (no roles)
         User::factory()->create([
-            'name' => 'Basic User',
-            'email' => 'test@example.com',
+            'first_name'    => 'Basic',
+            'last_name'     => 'User',
+            'email'         => 'test@example.com',
         ]);
     }
 }

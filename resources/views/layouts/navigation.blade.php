@@ -37,12 +37,13 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            {{ auth()->user()->name }}
+                            Hello, {{ auth()->user()->first_name }}
                             <img src="https://via.placeholder.com/50" alt="Profile icon" width="32" height="32" class="rounded-circle ms-2 mb-1">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('account') }}">Account</a></li>
+                            <li><a class="dropdown-item" href="{{ route('account.own') }}">Account</a></li>
                             <li><a class="dropdown-item" href="#">Credit</a></li>
+
 
                             <div class="dropdown-divider"></div>
 

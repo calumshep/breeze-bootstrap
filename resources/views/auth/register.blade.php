@@ -26,8 +26,12 @@
                 <label for="floatingName">Full Name</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="{{ old('email') }}" required>
-                <label for="floatingInput">Email Address</label>
+                <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="name@example.com" value="{{ old('email') }}" required>
+                <label for="floatingEmail">Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" name="dob" class="form-control" id="floatingDob" placeholder="2000-06-09" value="{{ old('dob') }}" required>
+                <label for="floatingDob">Date of Birth</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required autocomplete="new-password">

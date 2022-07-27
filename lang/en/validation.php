@@ -149,8 +149,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'dob' => [
+            'before' => 'The Date of Birth must be before today.',
         ],
     ],
 
