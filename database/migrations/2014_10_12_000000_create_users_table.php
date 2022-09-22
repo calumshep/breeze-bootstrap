@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->integer('credits')->default(0);
+            $table->string('local_area')->nullable();
             $table->date('dob');
         });
     }

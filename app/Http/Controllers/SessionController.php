@@ -111,6 +111,7 @@ class SessionController extends Controller
             'description'   => $request->description,
             'capacity'      => $request->capacity,
         ]);
+
         $session->save();
 
         return redirect()->route('sessions.index')->with('status', 'Session update saved!');

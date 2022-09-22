@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TraineeController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,13 @@ Route::controller(AccountController::class)->middleware(['auth'])->group(functio
 
 Route::resource('sessions', SessionController::class);
 Route::resource('trainees', TraineeController::class);
+
+Route::controller(BookingController::class)
+    ->name('sessions.')
+    ->prefix('/sessions')
+    ->group(function ()
+{
+    Route::post('{session}/book', 'book')->name('book');
+});
+
+Route::resource('sessions', SessionController::class)->middleware(['can:manage training sessions']);

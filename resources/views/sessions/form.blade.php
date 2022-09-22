@@ -2,7 +2,13 @@
 
 @section('content')
     <div class="d-md-flex justify-content-between align-items-baseline">
-        <h1>Create New Session</h1>
+        <h1>
+            @if(str_contains(Route::currentRouteName(), 'create'))
+                Create New Session
+            @else
+                View Session
+            @endif
+        </h1>
         <div>
             @if(str_contains(Route::currentRouteName(), 'show')) <a href="{{ route('sessions.edit', $session) }}" class="btn btn-primary">Edit</a> @endif
             <a href="{{ route('sessions.index') }}" class="btn btn-secondary">Back to sessions</a>
@@ -20,7 +26,16 @@
                   @endif>
 
                 @csrf
-                @if(str_contains(Route::currentRouteName(), 'edit')) @method('PUT') @endif
+                @if(str_contains(Route::currentRouteName(), 'edit')) @method('PATCH') @endif
+
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ $error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    @endforeach
+                @endif
 
                 <div class="mb-3">
                     <label for="name" class="form-label">
@@ -73,7 +88,7 @@
                                required
                                @if(str_contains(Route::currentRouteName(), 'show')) readonly @endif
                                @if(isset($session)) value="{{ $session->cost }}" @endif>
-                        <span class="input-group-text">credits</span>
+                        <span class="input-group-text">training day(s)</span>
                     </div>
 
                     @if(!str_contains(Route::currentRouteName(), 'show'))

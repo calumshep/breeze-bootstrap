@@ -29,4 +29,14 @@ class Trainee extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the sessions this trainee is booked into
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function sessions()
+    {
+        return $this->belongsToMany(Session::class);
+    }
 }

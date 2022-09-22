@@ -32,7 +32,7 @@
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $session->time->format('H:i, l, j M Y') }}</td>
                     <td>{{ $session->name }}</td>
-                    <td>{{ $session->cost }} credits</td>
+                    <td>{{ $session->cost }} training day(s)</td>
                     <td>
                         @if($session->capacity)
                             0 / {{ $session->capacity }}
