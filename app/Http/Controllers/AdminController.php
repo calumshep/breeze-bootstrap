@@ -18,4 +18,11 @@ class AdminController extends Controller
             'users' => User::all()
         ]);
     }
+
+    public function show(User $user)
+    {
+        return view('admin.users.show', [
+            'user' => $user
+        ]);
+    }
 }

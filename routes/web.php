@@ -62,6 +62,7 @@ Route::controller(AdminController::class)
     ->middleware(['can:see user details'])
     ->group(function ()
 {
-    Route::get('users', 'index')->name('index');
-    Route::get('users/{user}', 'index')->name('show');
+    Route::get('/', 'index')->name('index');
+    Route::get('users/{user}', 'show')->name('users.show');
+    Route::get('users/{user}/edit', 'edit')->name('users.edit');
 });
