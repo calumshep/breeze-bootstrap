@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TraineeController;
 use Illuminate\Support\Facades\Route;
@@ -28,12 +30,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-Route::controller(AccountController::class)->middleware(['auth'])->group(function () {
+
+Route::controller(AccountController::class)
+    ->middleware(['auth'])
+    ->group(function () {
     Route::get('/account', 'showOwn')->name('account.own');
     Route::put('/account/{user}', 'update')->name('account.update');
 });
 
-Route::resource('sessions', SessionController::class);
+Route::controller(CreditController::class)
+
+    ->group(function () {
+    Route::post('/purchase', 'purchase')->name('purchase');
+});
+
 Route::resource('trainees', TraineeController::class);
 
 Route::controller(BookingController::class)
@@ -45,3 +55,13 @@ Route::controller(BookingController::class)
 });
 
 Route::resource('sessions', SessionController::class)->middleware(['can:manage training sessions']);
+
+Route::controller(AdminController::class)
+    ->name('admin.')
+    ->prefix('/admin')
+    ->middleware(['can:see user details'])
+    ->group(function ()
+{
+    Route::get('users', 'index')->name('index');
+    Route::get('users/{user}', 'index')->name('show');
+});

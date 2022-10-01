@@ -31,6 +31,15 @@
                         </a>
                     </li>
                 @endcan
+
+                @can('see user details')
+                    <li class="navbar-item">
+                        <a href="{{ route('admin.index') }}"
+                           class="nav-link px-2 @if(str_contains(Route::currentRouteName(), 'admin')) active @endif">
+                            Admin
+                        </a>
+                    </li>
+                @endcan
             </ul>
 
             @auth
