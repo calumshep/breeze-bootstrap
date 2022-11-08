@@ -14,6 +14,7 @@ class Trainee extends Model
         'last_name',
         'dob',
         'user_id',
+        'credit'
     ];
 
     protected $casts = [

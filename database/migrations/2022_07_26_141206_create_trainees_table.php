@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('trainees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->string('first_name');
             $table->string('last_name');
             $table->date('dob');
-
+            $table->integer('credit');
             $table->foreignId('user_id')->constrained();
         });
     }
