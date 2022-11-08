@@ -22,6 +22,11 @@ namespace App\Models{
  * @property int $cost
  * @property string $description
  * @property int|null $capacity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Trainee[] $bookedTrainees
+ * @property-read int|null $booked_trainees_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $bookedUsers
+ * @property-read int|null $booked_users_count
+ * @method static \Database\Factories\SessionFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Session newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Session newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Session query()
@@ -47,12 +52,17 @@ namespace App\Models{
  * @property string $first_name
  * @property string $last_name
  * @property \Illuminate\Support\Carbon $dob
+ * @property int $credit
  * @property int $user_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Session[] $sessions
+ * @property-read int|null $sessions_count
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\TraineeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee query()
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereCredit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereDob($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Trainee whereId($value)
@@ -68,7 +78,8 @@ namespace App\Models{
  * App\Models\User
  *
  * @property int $id
- * @property string $name
+ * @property string $first_name
+ * @property string $last_name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
@@ -76,12 +87,16 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $credits
+ * @property string|null $local_area
+ * @property \Illuminate\Support\Carbon $dob
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Session[] $sessions
+ * @property-read int|null $sessions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Trainee[] $trainees
@@ -94,10 +109,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCredits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDob($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLocalArea($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)

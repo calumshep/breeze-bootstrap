@@ -4,13 +4,16 @@
 
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1>Scottish Ski Club</h1>
-            <p>
-                Welcome to Scottish Ski Club's training management system. You can book yourself or any of your
-                trainees into the upcoming sessions below. To book a particular session, select "More details"
-                below the session you wish to book, where you can then select who you want to book in to it. You
-                must have enough credit in your account to do so.
-            </p>
+            <div class="d-flex align-items-start justify-content-between">
+                <div>
+                    <h1>Scottish Ski Club</h1>
+                    <p class="lead">
+                        Welcome to Scottish Ski Club's training management system. You can book yourself or any of your
+                        trainees into the upcoming sessions below.
+                    </p>
+                </div>
+                <img width="150px" class="img-fluid" src="img/logo.png" alt="SSC Logo">
+            </div>
         </div>
 
         <div class="col-md-6">
