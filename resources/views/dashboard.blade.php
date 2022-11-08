@@ -20,28 +20,28 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h3 class="card-title">Your credit</h3>
-                    <p class="card-text flex align-items-baseline fs-5">
+                    <!--<p class="card-text flex align-items-baseline fs-5">
                         <span class="border rounded p-2">15</span> <strong>training days</strong>
-                    </p>
+                    </p>-->
 
                     <div class="list-group mb-3">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <strong>Trainee #1:</strong> 7 training days
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <strong>Trainee #2:</strong> 8 training days
-                        </a>
+                        @foreach(auth()->user()->trainees as $trainee)
+                            <a href="{{ route('trainees.show', $trainee) }}" class="list-group-item list-group-item-action">
+                                <strong>{{ $trainee->first_name . ' ' . $trainee->last_name }}:</strong>
+                                {{ $trainee->credit }} training days
+                            </a>
+                        @endforeach
                     </div>
 
-                    <a href="#" class="btn btn-primary btn-lg">Add credit</a>
-                    <a href="#" class="btn btn-secondary btn-lg">Transaction history</a>
+                    <!--<a href="#" class="btn btn-primary btn-lg">Add credit</a>
+                    <a href="#" class="btn btn-secondary btn-lg">Transaction history</a>-->
                 </div>
             </div>
         </div>
     </div>
 
     <h1 class="text-center">Upcoming Sessions</h1>
-    
+
     @if(session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('status')  }}
@@ -66,7 +66,7 @@
                     <h5 class="card-subtitle">{{ $session->time->format('H:i, l, j M Y') }}</h5>
                     <p class="card-text">{{ $session->description }}</p>
                     <p class="card-text"><strong>Cost:&nbsp;</strong> {{ $session->cost }} training day</p>
-                    <a href="#" class="btn btn-primary btn-lg">
+                    <a href="{{ route('sessions.view', $session) }}" class="btn btn-primary btn-lg">
                         More details &raquo;
                     </a>
                 </div>
@@ -75,25 +75,27 @@
                         @csrf
 
                         <label for="booking{{ $loop->index }}">Book in...</label>
-                        <select class="form-select mb-3" id="booking{{ $loop->index }}" name="book">
-                            <option selected value="-1">Yourself</option>
-                            <option disabled>---</option>
+                        <div class="input-group mb-3">
+                            <select class="form-select" id="booking{{ $loop->index }}" name="book">
+                                <option selected value="-1">Yourself</option>
+                                <option disabled>---</option>
 
-                            @foreach(auth()->user()->trainees as $trainee)
-                                <option value="{{ $trainee->id }}">
-                                    {{ $trainee->first_name . ' ' . $trainee->last_name }}
-                                </option>
-                            @endforeach
-                        </select>
+                                @foreach(auth()->user()->trainees as $trainee)
+                                    <option value="{{ $trainee->id }}">
+                                        {{ $trainee->first_name . ' ' . $trainee->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
 
-                        <button type="submit" class="btn btn-primary">Book</button>
-
-                        {{ $session->bookedUsers()->count() }}
+                            <button type="submit" class="btn btn-primary">Book</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     @empty
+
+        <p>There are no upcoming sessions!</p>
 
     @endforelse
 

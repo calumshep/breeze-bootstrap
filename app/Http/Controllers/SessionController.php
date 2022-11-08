@@ -72,6 +72,19 @@ class SessionController extends Controller
     }
 
     /**
+     * Display the session details for members.
+     *
+     * @param  \App\Models\Session  $session
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function view(Session $session)
+    {
+        return view('sessions.show', [
+            'session' => $session,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Session  $session

@@ -19,33 +19,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Main index page
+Route::get('/', function ()
+{
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+// Dashboard
+Route::get('/dashboard', function ()
+{
     return view('dashboard', [
-        'sessions' => \App\Models\Session::orderBy('time')->paginate(10)
+        'sessions' => \App\Models\Session::orderBy('time')->paginate(5)
     ]);
 })->middleware(['auth'])->name('dashboard');
 
+// Auth routes
 require __DIR__.'/auth.php';
-
 Route::controller(AccountController::class)
     ->middleware(['auth'])
-    ->group(function () {
+    ->group(function ()
+{
     Route::get('/account', 'showOwn')->name('account.own');
     Route::put('/account/{user}', 'update')->name('account.update');
 });
 
-Route::controller(CreditController::class)
+// Basic resources
+Route::resource('trainees', TraineeController::class);
+Route::controller(SessionController::class)
+    ->middleware(['auth'])
+    ->group(function ()
+{
+    Route::get('/sessions/{session}/view', 'view')->name('sessions.view');
+});
 
     ->group(function () {
     Route::post('/purchase', 'purchase')->name('purchase');
 });
 
-Route::resource('trainees', TraineeController::class);
-
+// Session booking routes
 Route::controller(BookingController::class)
     ->name('sessions.')
     ->prefix('/sessions')
@@ -54,8 +65,7 @@ Route::controller(BookingController::class)
     Route::post('{session}/book', 'book')->name('book');
 });
 
-Route::resource('sessions', SessionController::class)->middleware(['can:manage training sessions']);
-
+// Admin routes
 Route::controller(AdminController::class)
     ->name('admin.')
     ->prefix('/admin')

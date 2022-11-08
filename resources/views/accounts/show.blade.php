@@ -102,7 +102,11 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#account-accordion">
                         <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <h2 class="mb-0">
+                                Your credit:
+                                <span class="border rounded px-2">{{ auth()->user()->credits }}</span>
+                                training days
+                            </h2>
                         </div>
                     </div>
                 </div>
@@ -116,7 +120,19 @@
 
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#account-accordion">
                         <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Net</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">No transactions found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -130,12 +146,114 @@
 
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#account-accordion">
                         <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <!-- Credit product select: https://getbootstrap.com/docs/5.2/examples/list-groups/ -->
+                            <div class="list-group list-group-radio d-grid gap-2 border-0 w-auto mb-3">
+                                <div class="position-relative">
+                                    <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="creditOptions" id="creditOptions1" value="40" checked>
+                                    <input type="hidden" name="cost1" id="cost1" value="600">
+
+                                    <label class="list-group-item py-3 pe-5" for="creditOptions1">
+                                        <strong class="fw-semibold">20 training days</strong> &middot; <span class="text-muted">£600</span>
+
+                                        <span class="d-block small opacity-75">
+                                            Ideal if you want to train every weekend!
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="position-relative">
+                                    <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="creditOptions" id="creditOptions2" value="20">
+                                    <input type="hidden" name="cost2" id="cost2" value="350">
+
+                                    <label class="list-group-item py-3 pe-5" for="creditOptions2">
+                                        <strong class="fw-semibold">10 training days</strong> &middot; <span class="text-muted">£350</span>
+
+                                        <span class="d-block small opacity-75">
+                                            Ideal if you will be around for most of the season.
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="position-relative">
+                                    <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="creditOptions" id="creditOptions3" value="1">
+                                    <input type="hidden" name="cost3" id="cost3" value="40">
+
+                                    <label class="list-group-item py-3 pe-5" for="creditOptions3">
+                                        <strong class="fw-semibold">1 training day</strong> &middot; <span class="text-muted">£40</span>
+
+                                        <span class="d-block small opacity-75">
+                                            A single ad-hoc session, for if you want to try out race training, or you're
+                                            not around much and want to supplement your program.
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="btn btn-primary disabled">Purchase</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Attach event listener to each credit product option to update charged amount on click
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById("creditOptions" + i).addEventListener("click", function () {
+                // Gets the amount from the hidden input in each credit product list group item
+                document.getElementById("chargeAmt").innerHTML = document.getElementById("cost" + i).value;
+            });
+        }
+
+        // Initialise stripe
+        let stripe = Stripe("{{ env('STRIPE_KEY') }}");
+        let elements = stripe.elements();
+
+        // Style stripe elements
+        let style = {
+            base: {
+                iconColor: '#0d6efd',
+                color: '#212529',
+                fontWeight: '500',
+                fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                ':-webkit-autofill': {
+                    color: '#e8f0fe',
+                },
+                '::placeholder': {
+                    color: '#212529',
+                },
+            },
+            invalid: {
+                iconColor: '#dc3546',
+                color: '#dc3546',
+            },
+        };
+
+        let card = elements.create('card', {style: style});
+        card.mount('#card-element');
+        let paymentMethod = null;
+
+        // Actually handle card details
+        const cardHolderName = document.getElementById('card-holder-name');
+        const cardButton = document.getElementById('card-button');
+
+        cardButton.addEventListener('click', async (e) => {
+            const { paymentMethod, error } = await stripe.createPaymentMethod(
+                'card', card, {
+                    billing_details: { name: cardHolderName.value }
+                }
+            );
+
+            if (error) {
+                // Display "error.message" to the user...
+            } else {
+                // The card has been verified successfully...
+            }
+        });
+    </script>
 
 @endsection
