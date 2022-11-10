@@ -51,8 +51,19 @@ Route::controller(SessionController::class)
 {
     Route::get('/sessions/{session}/view', 'view')->name('sessions.view');
 });
+Route::resource('sessions', SessionController::class)->middleware(['can:manage training sessions']);
 
-    ->group(function () {
+// Credit increase routes
+Route::controller(CreditController::class)
+    ->name('credit.')
+    ->prefix('/credit')
+    ->group(function ()
+{
+    Route::middleware(['can:see user details'])->group(function ()
+    {
+        Route::post('/add', 'add')->name('add');
+        Route::post('/set', 'set')->name('set');
+    });
     Route::post('/purchase', 'purchase')->name('purchase');
 });
 
@@ -74,5 +85,6 @@ Route::controller(AdminController::class)
 {
     Route::get('/', 'index')->name('index');
     Route::get('users/{user}', 'show')->name('users.show');
+    Route::get('users/{user}/trainees/{trainee}', 'trainee')->name('users.trainee');
     Route::get('users/{user}/edit', 'edit')->name('users.edit');
 });

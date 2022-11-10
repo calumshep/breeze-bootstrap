@@ -2,33 +2,33 @@
 
 @section('content')
 
+    <a href="{{ route('admin.index') }}" class="btn btn-secondary mb-3">Back</a>
+
+    @if(session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status')  }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endforeach
+    @endif
+
     <div class="row">
         <div class="col-md-6">
-            <div class="d-flex justify-content-between align-items-baseline">
-                <h1 class="mb-3">View Account</h1>
-                <div>
-                    <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-secondary">Edit</a>
-                </div>
-            </div>
-
-            @if(session('status'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('status')  }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $error }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                @endforeach
-            @endif
-
             <div class="card">
                 <div class="card-body">
+                    <div class="card-title d-flex justify-content-between align-items-baseline">
+                        <h1 class="mb-3">Account</h1>
+                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-secondary">Edit</a>
+                    </div>
+
                     <form>
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -72,7 +72,39 @@
         </div>
 
         <div class="col-md-6">
-            <input type="text" name="credits" value="{{ $user->credits }}">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4>Trainees</h4>
+
+                    <table class="table table-hover table-striped card-text">
+                        <thead>
+                        <tr>
+                            <th>First Name(s)</th>
+                            <th>Last Name</th>
+                            <th>Credit</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        @forelse($trainees as $trainee)
+                            <tr>
+                                <td>{{ $trainee->first_name }}</td>
+                                <td>{{ $trainee->last_name }}</td>
+                                <td>{{ $trainee->credit }} training days</td>
+                                <td class="text-end">
+                                    <a href="{{ route('admin.users.trainee', [$user, $trainee->id]) }}">View &raquo;</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6">No trainees found.</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -42,21 +42,7 @@
 
     <h1 class="text-center">Upcoming Sessions</h1>
 
-    @if(session('status'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('status')  }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
-    @if($errors->any())
-        @foreach($errors->all() as $error)
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ $error }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        @endforeach
-    @endif
+    @include('layouts.status')
 
     @forelse($sessions as $session)
         <div class="card mb-3">
@@ -77,8 +63,8 @@
                         <label for="booking{{ $loop->index }}">Book in...</label>
                         <div class="input-group mb-3">
                             <select class="form-select" id="booking{{ $loop->index }}" name="book">
-                                <option selected value="-1">Yourself</option>
-                                <option disabled>---</option>
+                                <!--<option selected value="-1">Yourself</option>-->
+                                <option disabled selected>Select...</option>
 
                                 @foreach(auth()->user()->trainees as $trainee)
                                     <option value="{{ $trainee->id }}">

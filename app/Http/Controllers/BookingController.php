@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NegativeCreditException;
 use App\Exceptions\SessionBookingException;
 use App\Models\Session;
 use App\Models\Trainee;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -20,13 +22,25 @@ class BookingController extends Controller
     public function book(Request $request, Session $session)
     {
         try {
-            // If the 'book' parameter is set, book the given trainee. Otherwise, book the authenticated user
-            $request->book > -1 ?
-                $session->bookTrainee(Trainee::findOrFail($request->book)) :
-                $session->bookUser(auth()->user());
+//            if ($request->book == -1) { // Booking the authenticated user
+//                $session->bookUser(auth()->user());
+//            } else {
+                // Book the specified trainee
+                $trainee = Trainee::findOrFail($request->book);
+                $session->bookTrainee($trainee);
+
+                // Charge the trainee
+                $trainee->chargeCredit($session->cost);
+                Transaction::create([
+                    'net'           => -$session->cost,
+                    'session_id'    => $session->id,
+                    'trainee_id'    => $trainee->id
+                ]);
+//            }
         } catch (SessionBookingException $e) {
-            // Display error message
             return redirect()->back()->withErrors($e->getMessage());
+        } catch (NegativeCreditException $e) {
+            return redirect()->back()->withErrors('You do not have enough credit for this session.');
         }
 
         // Take them back to the dashboard

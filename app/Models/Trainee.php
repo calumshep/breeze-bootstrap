@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasCredit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCredit;
 
     protected $fillable = [
         'first_name',

@@ -30,7 +30,7 @@
                     <td>{{ $user->last_name }}</td>
                     <td>{{ $user->dob->format('d/m/Y') }}</td>
                     <td class="text-end">
-                        <a href="{{ route('admin.show', $user->id) }}">View &raquo;</a>
+                        <a href="{{ route('admin.users.show', $user->id) }}">View &raquo;</a>
                     </td>
                 </tr>
             @empty

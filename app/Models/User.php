@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;//, Billable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles; //, HasCredit, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -65,5 +65,15 @@ class User extends Authenticatable
     public function sessions()
     {
         return $this->belongsToMany(Session::class);
+    }
+
+    /**
+     * Gets the transactions relating to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
