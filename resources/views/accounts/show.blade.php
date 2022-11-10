@@ -2,26 +2,26 @@
 
 @section('content')
 
+    <h1 class="mb-3">Your Account</h1>
+
+    @if(session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status')  }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endforeach
+    @endif
+
     <div class="row">
         <div class="col-md-6">
-            <h1 class="mb-3">Your Account</h1>
-
-            @if(session('status'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('status')  }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $error }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                @endforeach
-            @endif
-
             <div class="card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('account.update', auth()->user()) }}">
@@ -92,7 +92,9 @@
         </div>
 
         <div class="col-md-6">
-            <div class="accordion" id="account-accordion">
+            @include('layouts.credit')
+
+            <!--<div class="accordion" id="account-accordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -146,7 +148,7 @@
 
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#account-accordion">
                         <div class="accordion-body">
-                            <!-- Credit product select: https://getbootstrap.com/docs/5.2/examples/list-groups/ -->
+                            <-- Credit product select: https://getbootstrap.com/docs/5.2/examples/list-groups/ --
                             <div class="list-group list-group-radio d-grid gap-2 border-0 w-auto mb-3">
                                 <div class="position-relative">
                                     <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="creditOptions" id="creditOptions1" value="40" checked>
@@ -193,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
