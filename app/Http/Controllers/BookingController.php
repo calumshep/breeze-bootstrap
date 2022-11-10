@@ -31,7 +31,7 @@ class BookingController extends Controller
 
         // Take them back to the dashboard
         return redirect()->route('dashboard')->with([
-            'status' => 'Successfully booked in '. $request->book ? $request->book : auth()->user()->id . ' to ' . $session->time
+            'status' => 'Successfully booked in '. $trainee->first_name . ' ' . $trainee->last_name . ' on ' . $session->time->format('D j M') . '.'
         ]);
     }
 }
