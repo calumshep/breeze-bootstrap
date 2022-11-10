@@ -3,15 +3,21 @@
 @section('content')
 
     <div class="d-md-flex justify-content-between align-items-baseline">
-        <h1>Add New Trainee</h1>
-        <div>
-            @if(str_contains(Route::currentRouteName(), 'show')) <a href="{{ route('trainees.edit', $trainee) }}" class="btn btn-primary">Edit</a> @endif
-            <a href="{{ route('trainees.index') }}" class="btn btn-secondary">Back to trainees</a>
+        <h1>{{ str_contains(Route::currentRouteName(), 'create') ? 'Add New ' : '' }}Trainee</h1>
+        <div class="mb-3">
+            @if(str_contains(Route::currentRouteName(), 'show'))
+                <a href="{{ route('trainees.edit', $trainee) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('trainees.index') }}" class="btn btn-secondary">Back</a>
+            @elseif(str_contains(Route::currentRouteName(), 'edit'))
+                <a href="{{ route('trainees.show', $trainee) }}" class="btn btn-secondary">Back</a>
+            @elseif(str_contains(Route::currentRouteName(), 'create'))
+                <a href="{{ route('trainees.index') }}" class="btn btn-secondary">Back</a>
+            @endif
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-md-6">
             <form @if(!str_contains(Route::currentRouteName(), 'show')) method="POST" @endif
 
                   @if(str_contains(Route::currentRouteName(), 'create'))
@@ -74,6 +80,12 @@
                     <button type="submit" class="btn btn-lg btn-success">Save</button>
                 @endif
             </form>
+        </div>
+
+        <div class="col-md-6">
+            @if(str_contains(Route::currentRouteName(), 'show'))
+                @include('layouts.transactions')
+            @endif
         </div>
     </div>
 

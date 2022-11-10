@@ -63,7 +63,8 @@ class TraineeController extends Controller
     public function show(Trainee $trainee)
     {
         return view('trainees.form', [
-            'trainee' => $trainee
+            'trainee' => $trainee,
+            'transactions' => $trainee->transactions()->latest()->paginate(5)
         ]);
     }
 
