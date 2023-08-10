@@ -1,12 +1,11 @@
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <span class="navbar-brand mb-0 h1">Training Manager</span>
+            <a href="{{ route('welcome') }}" class="navbar-brand mb-0 h1">{{ config('app.name') }}</a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Sessions</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Users</a></li>
+                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Dashboard</a></li>
             </ul>
 
             @auth
